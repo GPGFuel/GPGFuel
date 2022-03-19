@@ -2,7 +2,7 @@ Zielgruppe: Admin
 
 ## Challenge
 
-
+Storing the public key of a PGP key pair in a shared directory whenever the user can also access the email addresses associated with the key pair.
 ## 
 
 
