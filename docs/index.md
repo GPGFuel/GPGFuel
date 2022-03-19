@@ -1,6 +1,6 @@
 ## Challenge
 
-Storing the public key of a PGP key pair in a Web Key Directory whenever the user can also access the email addresses associated with the key pair.
+Storing the public key of a PGP key pair in a Web Key Directory whenever the user can also access the email addresses associated with this key.
 
 
 ## What is GPGFuel?
