@@ -27,6 +27,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: cp .docs/index.md README.md
+        run: cp ./docs/index.md README.md
 
 
