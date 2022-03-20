@@ -9,10 +9,6 @@ use Laminas\Diactoros\Response\EmptyResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use nicoSWD\GPG\GPG;
-use nicoSWD\GPG\PublicKey;
-
-use function time;
 
 class PublishHandler implements RequestHandlerInterface
 {
@@ -24,7 +20,16 @@ class PublishHandler implements RequestHandlerInterface
       }
 
       $key = $body['pgp-key'];
-      $pubKey = new PublicKey($key);
-      return new JsonResponse(['key' => $pubKey]);
+      $pubKey = \OpenPGP_Message::parse(\OpenPGP::unarmor($key));
+
+      // For now, only list all user ids found in the key
+      $users = [];
+      foreach ($pubKey as $packet) {
+        if ($packet instanceof \OpenPGP_UserIDPacket) {
+          $users[] = $packet;
+        }
+      }
+
+      return new JsonResponse($users);
     }
 }

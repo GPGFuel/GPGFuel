@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "80d2368861001c03d9834153e5f236df",
+    "content-hash": "a52da9b74774c74126cd0cb7d3d4bf50",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -1310,58 +1310,6 @@
             "time": "2021-05-09T16:03:16+00:00"
         },
         {
-            "name": "nicoswd/php-gpg",
-            "version": "1.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nicoSWD/php-gpg.git",
-                "reference": "868cf938c3c03b64c4001acf25ade7b0d8fb43c3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nicoSWD/php-gpg/zipball/868cf938c3c03b64c4001acf25ade7b0d8fb43c3",
-                "reference": "868cf938c3c03b64c4001acf25ade7b0d8fb43c3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "phpseclib/phpseclib": "^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.1"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/globals.php"
-                ],
-                "psr-4": {
-                    "nicoSWD\\GPG\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-1.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Jason Hinkle"
-                },
-                {
-                    "name": "Ian Carroll"
-                },
-                {
-                    "name": "Nicolas Oelgart"
-                }
-            ],
-            "description": "Pure PHP GPG implementation, forked from php-gpg.",
-            "keywords": [
-                "PGP",
-                "gpg"
-            ],
-            "time": "2018-04-09T09:19:41+00:00"
-        },
-        {
             "name": "nikic/fast-route",
             "version": "v1.3.0",
             "source": {
@@ -1894,6 +1842,67 @@
                 "source": "https://github.com/php-fig/http-server-middleware/tree/master"
             },
             "time": "2018-10-30T17:12:04+00:00"
+        },
+        {
+            "name": "singpolyma/openpgp-php",
+            "version": "0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/singpolyma/openpgp-php.git",
+                "reference": "69292f6a46ed7f687083bfb8974b161a41ab213c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/singpolyma/openpgp-php/zipball/69292f6a46ed7f687083bfb8974b161a41ab213c",
+                "reference": "69292f6a46ed7f687083bfb8974b161a41ab213c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0 || ^8.0",
+                "phpseclib/phpseclib": "^2.0 !=2.0.8"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "suggest": {
+                "ext-mcrypt": "required if you use encryption cast5"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Unlicense"
+            ],
+            "authors": [
+                {
+                    "name": "Arto Bendiken",
+                    "email": "arto.bendiken@gmail.com"
+                },
+                {
+                    "name": "Stephen Paul Weber",
+                    "email": "singpolyma@singpolyma.net"
+                }
+            ],
+            "description": "Pure-PHP implementation of the OpenPGP Message Format (RFC 4880)",
+            "funding": [
+                {
+                    "url": "https://github.com/singpolyma",
+                    "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/singpolyma",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://www.patreon.com/singpolyma",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-05-26T00:35:20+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
