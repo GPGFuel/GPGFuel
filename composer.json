@@ -13,6 +13,23 @@
         "webkeyservice",
         "service"
     ],
+    "authors": [{
+        "name": "Mathias"
+    },{
+        "name": "Matthieu"
+    }, {
+        "name": "Oezhan"
+    }, {
+        "name": "Wiktor"
+    }, {
+        "name": "Georg"
+    }, {
+        "name": "landi0815"
+    }, {
+        "name": "oli101"
+    }, {
+        "name": "heiglandreas"
+    }],
     "homepage": "https://gpgfuel.com",
     "support": {
         "docs": "https://docs.gpgfuel.com/",
