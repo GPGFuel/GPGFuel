@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\Services\MailService;
+use App\Services\StorageService;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -28,6 +30,17 @@ class PublishHandler implements RequestHandlerInterface
         if ($packet instanceof \OpenPGP_UserIDPacket) {
           $users[] = $packet;
         }
+      }
+
+      $mailService = new MailService();
+      $storageService = new StorageService();
+      foreach($users as $user) {
+          $keyContent = uniqid();
+          $fingerprint = hash("sha256", $keyContent); // TODO : Replace with key / email fingerprint
+          $storageService->storePublicKey($fingerprint, $keyContent);
+          $signature = $storageService->generateSignature($fingerprint);
+          $verifyUrl = $_ENV['APP_URL']."/verify/$fingerprint/$signature";
+          $mailService->sendMail($user->email, $user->name, 'Verify yourself", "To verify yourself, click here : <a href="'.$verifyUrl.'">'.$verifyUrl.'</a>');
       }
 
       return new JsonResponse($users);
