@@ -58,4 +58,21 @@ class Utilities {
         
         return $wdk;
     }
+
+    /**
+     * Get unique users contained in the GPG key
+     * 
+     * @param \OpenPGP_Message $key
+     * @return \OpenPGP_UserIDPacket[]
+     */
+    static function getUniqueUsers(\OpenPGP_Message $key) {
+        $users = [];
+        foreach ($key as $packet) {
+            if ($packet instanceof \OpenPGP_UserIDPacket) {
+                $users[] = $packet;
+            }
+        }
+
+        return $users;
+    }
 }
