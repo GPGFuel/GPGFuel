@@ -1,26 +1,25 @@
 {
-    "name": "mezzio/mezzio-skeleton",
-    "description": "Laminas mezzio skeleton. Begin developing PSR-15 middleware applications in seconds!",
+    "name": "gpgfuel/gpgfuel",
+    "description": "WebkeyDirectory management made easy",
     "type": "project",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "keywords": [
-        "laminas",
-        "mezzio",
-        "skeleton",
-        "middleware",
-        "psr",
-        "psr-7",
-        "psr-11",
-        "psr-15"
+        "webkeydirectory",
+        "webkey",
+        "directory",
+        "gpg",
+        "wkd",
+        "wks",
+        "webkeyservice",
+        "service"
     ],
-    "homepage": "https://mezzio.dev",
+    "homepage": "https://gpgfuel.com",
     "support": {
-        "docs": "https://docs.mezzio.dev/mezzio/",
-        "issues": "https://github.com/mezzio/mezzio-skeleton/issues",
-        "source": "https://github.com/mezzio/mezzio-skeleton",
-        "rss": "https://github.com/mezzio/mezzio-skeleton/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
+        "docs": "https://docs.gpgfuel.com/",
+        "issues": "https://github.com/GPGFuel/GPGFuel/issues",
+        "source": "https://github.com/GPGFuel/GPGFuel",
+        "rss": "https://github.com/GPGFuel/GPGFuel/releases.atom",
+        "chat": "https://discord.com/channels/954765889725661215/954765889725661219"
     },
     "config": {
         "sort-packages": true
