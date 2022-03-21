@@ -24,7 +24,7 @@ jobs:
           php-version: ${{ matrix.php_version.version }}
       - uses: actions/checkout@v2
       - name: Install Dependencies
-        run: php composer.phar install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
+        run: php composer.phar install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev || true
       - uses: montudor/action-zip@v1
         with:
           args: zip -qq -r  ${{ matrix.php_version.artifact_name }}.zip .
