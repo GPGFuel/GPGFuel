@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  build:
+    name: Build for php version ${{ matrix.php_version.version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php_version:
+          - version: 7.4
+            artifact_name: "gpgfuel-php74.zip"
+          - version: 8.0
+            artifact_name: "gpgfuel-php80.zip"
+          - version: 8.1
+            artifact_name: "gpgfuel-php81.zip"
+    steps:
+      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: ${{ matrix.php_version.version }}
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: php composer.phar install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
+      - uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r  ${{ matrix.php_version.artifact_name }}.zip .
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/release/${{ matrix.php_version.artifact_name }}.zip
+          asset_name: ${{ matrix.php_version.artifact_name }}.zip
+          tag: ${{ github.ref }}
