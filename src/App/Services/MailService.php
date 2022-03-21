@@ -17,11 +17,12 @@ class MailService {
         return $phpmailer;
     }
 
-    public function sendMail($email, $name, $subject, $content) {
+    public function sendMail($email, $name, $subject, $content, $html = true) {
         $mailer = $this->init();
         $mailer->addAddress($email, $name);
         $mailer->Subject = $subject;
         $mailer->Body =  $content;
+        $mailer->isHTML($html);
         $mailer->send();
     }
 }

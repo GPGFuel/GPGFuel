@@ -45,7 +45,7 @@ class PublishHandler implements RequestHandlerInterface
             $storageService->storePublicKey($fingerprint, $rawKey);
             $signature = $storageService->generateSignature($fingerprint);
             $verifyUrl = $_ENV['APP_URL']."/verify/$fingerprint/$signature";
-            $mailService->sendMail($user->email, $user->name, 'Verify yourself', 'To verify yourself, click here : <a href="'.$verifyUrl.'">'.$verifyUrl.'</a>');
+            $mailService->sendMail($user->email, $user->name, 'Verify yourself', "Hello $user->name <br>Click on the link below to verify your email $user->email<br> <a href='$verifyUrl'>$verifyUrl</a>");
         }
 
         return new HtmlResponse($this->template->render('app::received', ['users' => $users]));
