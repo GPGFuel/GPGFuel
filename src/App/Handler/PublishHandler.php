@@ -6,6 +6,7 @@ namespace App\Handler;
 
 use App\Services\MailService;
 use App\Services\StorageService;
+use App\Utilities;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Template\TemplateRendererInterface;
@@ -31,22 +32,17 @@ class PublishHandler implements RequestHandlerInterface
         }
 
         $key = $body['pgp-key'];
-        $pubKey = \OpenPGP_Message::parse(\OpenPGP::unarmor($key));
+        $rawKey = \OpenPGP::unarmor($key);
+        $pubKey = \OpenPGP_Message::parse($rawKey);
 
         // For now, only list all user ids found in the key
-        $users = [];
-        foreach ($pubKey as $packet) {
-            if ($packet instanceof \OpenPGP_UserIDPacket) {
-                $users[] = $packet;
-            }
-        }
-
+        $users = Utilities::getUniqueUsers($pubKey);
+        
         $mailService = new MailService();
         $storageService = new StorageService();
         foreach($users as $user) {
-            $keyContent = uniqid();
-            $fingerprint = hash("sha256", $keyContent); // TODO : Replace with key / email fingerprint
-            $storageService->storePublicKey($fingerprint, $keyContent);
+            $fingerprint = Utilities::emailToWDKHash($user->email);
+            $storageService->storePublicKey($fingerprint, $rawKey);
             $signature = $storageService->generateSignature($fingerprint);
             $verifyUrl = $_ENV['APP_URL']."/verify/$fingerprint/$signature";
             $mailService->sendMail($user->email, $user->name, 'Verify yourself', 'To verify yourself, click here : <a href="'.$verifyUrl.'">'.$verifyUrl.'</a>');
