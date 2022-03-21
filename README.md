@@ -74,6 +74,8 @@ nor does he or she need to manage the public key manually.
 
 ## Screenshots
 
+![Easy Usage](./docs/media/ezgif-2-8ac9491ab1.gif)
+
 ## Installation
 
 ### Preparation
