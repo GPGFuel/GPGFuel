@@ -5,13 +5,27 @@ namespace App\Services;
 class StorageService {
 
     private $secretKey;
+    const WKD_TMP_FOLDER = "StorageService::WKD_TMP_FOLDER";
+    const WKD_FOLDER = "StorageService::WKD_FOLDER";
 
     function __construct() {
         $this->secretKey = $_ENV['APP_SECRET'];
     }
 
+    private function getBaseDirectory($type) {
+        switch ($type) {
+            case StorageService::WKD_TMP_FOLDER:
+                return $_ENV['TEMP_PATH'] ?? "storage/tmp";
+            case StorageService::WKD_FOLDER:
+                return $_ENV['WEBKEYDIRECTORY_PATH'] ?? "storage/webkeydirectory";
+            default:
+                return "storage";
+        }
+    }
+
     private function getFileLocation($fingerprint, $type) {
-        $base = "storage/$type";
+        $base = $this->getBaseDirectory($type);
+
         if (!file_exists($base)) {
             mkdir($base, 0733, true);
         }
@@ -21,23 +35,8 @@ class StorageService {
         return "$base/$fingerprint";
     }
 
-    function guidv4($data = null) {
-        // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
-        $data = $data ?? random_bytes(16);
-        assert(strlen($data) == 16);
-
-        // Set version to 0100
-        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
-        // Set bits 6-7 to 10
-        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
-
-        // Output the 36 character UUID.
-        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
-    }
-
-
     public function storePublicKey($fingerprint, $content) {
-        $file = fopen($this->getFileLocation($fingerprint, "tmp"), "w");
+        $file = fopen($this->getFileLocation($fingerprint, StorageService::WKD_TMP_FOLDER), "w");
         fwrite($file, $content);
         fclose($file);
     }
@@ -57,8 +56,8 @@ class StorageService {
     }
 
     public function setVerified($fingerprint) {
-        $tmpFileLocation = $this->getFileLocation($fingerprint, "tmp");
-        $finalFileLocation = $this->getFileLocation($fingerprint, "final");
+        $tmpFileLocation = $this->getFileLocation($fingerprint, StorageService::WKD_TMP_FOLDER);
+        $finalFileLocation = $this->getFileLocation($fingerprint, StorageService::WKD_FOLDER);
 
         if (!file_exists($tmpFileLocation)) {
             throw new \Exception("File does not exists");
