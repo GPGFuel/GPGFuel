@@ -122,6 +122,44 @@ have your solution included in this list.
     
 ## Usage
 
+Install composer dependencies
+```bash
+php composer.phar install
+```
+
+Copy the project environnement file
+```bash
+cp .env.dist .env
+```
+
+And set the proper configuration variables :
+
+`APP_SECRET` should be a random generated string
+
+`APP_URL` should be your current app location ( example : https://example.com)
+
+### Mailer configuration
+
+```bash
+MAILER_HOST=smtp.example.com
+MAILER_AUTH=true
+MAILER_PORT=25
+MAILER_USERNAME=noreply@example.com
+MAILER_PASSWORD=AnAwesomePassword!
+MAILER_FROM=noreply@example.com
+MAILER_NAME=Example GPG Verification
+```
+
+### Storage Configuration
+`TMP_PATH` is a temporary folder where you want to store temporary keys awaiting verification. It shoud not be accessible publicly on internet.
+
+`WEBKEYDIRECTORY_PATH` is the path to your openphpkey well known folder.
+
+
+```bash
+TMP_PATH=/tmp/webkeydirectory/
+WEBKEYDIRECTORY_PATH=/var/www/example.com/.well_known/openpgpkey/hu/
+```
 ## Links
 
 * [WebKey Directory description at the GPG website](https://wiki.gnupg.org/WKD)
